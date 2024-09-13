@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Move into ur dream</title>
+        <link rel="stylesheet" href="index.css"/>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=SUSE:wght@800&display=swap" rel="stylesheet">
+
+
+        <script type="module">
+          // Подключение Firebase через CDN
+          import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+          import { getAuth, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+      
+          const firebaseConfig = {
+            apiKey: "AIzaSyAubA02OcvxHWf63bJStwB1IqZTn4eunw0",
+            authDomain: "project1-83e37.firebaseapp.com",
+            projectId: "project1-83e37",
+            storageBucket: "project1-83e37.appspot.com",
+            messagingSenderId: "879925774333",
+            appId: "1:879925774333:web:2e96201ce14cb2d56d7b94",
+            measurementId: "G-CH219MGLXD"
+          };
+      
+          // Инициализация Firebase
+          const app = initializeApp(firebaseConfig);
+          const auth = getAuth(app); // auth должен быть объявлен здесь
+          const provider = new GoogleAuthProvider();
+      
+          // Теперь ваш код для регистрации пользователя
+          document.getElementById('registerForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const email = document.getElementById('inEmail').value;
+            const password = document.getElementById('inPass').value;
+            
+            createUserWithEmailAndPassword(auth, email, password) // используем auth
+              .then((userCredential) => {
+                const user = userCredential.user;
+                console.log('User registered:', user);
+                window.location.href = 'main.html'; // Перенаправление
+              // Обновляем профиль пользователя, чтобы сохранить имя пользователя          
+              })
+              .catch((error) => {
+              var errorCode = error.code;
+              var errorMessage = error.message;
+              console.error('Error:', errorCode, errorMessage);
+              });
+          });
+
+
+          // Функция для входа пользователя
+          async function loginUser() {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+          try {
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
+            console.log('User logged in:', user);
+            window.location.href = 'main.html'; // Перенаправление после успешного входа
+          } catch (error) {
+            console.error('Error during login:', error);
+            alert('Login failed: ' + error.message);
+          }
+          }
+
+          // Функция для сброса пароля
+          async function resetPassword() {
+          const email = document.getElementById('forgotPasswordEmail').value;
+
+          try {
+          await sendPasswordResetEmail(auth, email);
+          alert('Password reset email sent. Please check your inbox.');
+          document.getElementById('forgotPasswordContainer').style.display = 'none'; // Скрываем форму сброса пароля
+          } catch (error) {
+          console.error('Error during password reset:', error);
+          alert('Password reset failed: ' + error.message);
+          }
+          }
+
+          // Обработчики событий
+          document.addEventListener('DOMContentLoaded', () => {
+          // Переключение на форму регистрации
+          document.getElementById('showRegisterForm').addEventListener('click', () => {
+          document.getElementById('registerFormContainer').style.display = 'block';
+          document.getElementById('loginFormContainer').style.display = 'none';
+          });
+
+          // Переключение на форму входа
+          document.getElementById('showLoginForm').addEventListener('click', () => {
+          document.getElementById('registerFormContainer').style.display = 'none';
+          document.getElementById('loginFormContainer').style.display = 'block';
+          });
+
+          // Показ формы сброса пароля
+          document.getElementById('forgotPasswordButton').addEventListener('click', () => {
+          document.getElementById('forgotPasswordContainer').style.display = 'block';
+          document.getElementById('registerFormContainer').style.display = 'none';
+          document.getElementById('loginFormContainer').style.display = 'none';
+          });
+
+
+          document.getElementById('return').addEventListener('click', () => {
+          document.getElementById('forgotPasswordContainer').style.display = 'none';
+          document.getElementById('loginFormContainer').style.display = 'none';
+          document.getElementById('registerFormContainer').style.display = 'block';
+          });
+
+          // Обработка формы регистрации
+          document.getElementById('registerForm').addEventListener('submit', (e) => {
+          e.preventDefault();
+          registerUser();
+          });
+
+          // Обработка формы входа
+          document.getElementById('loginForm').addEventListener('submit', (e) => {
+          e.preventDefault();
+          loginUser();
+          });
+           // Обработка формы сброса пароля
+          document.getElementById('forgotPasswordForm').addEventListener('submit', (e) => {
+          e.preventDefault();
+          resetPassword();
+          });
+          });
+      
+        </script>
+
+    </head>
+
+    <body class="body">
+
+        <header class="header">
+            <h1>Welcome</h1><br>
+            <p>your dream has never been closer than now</p>
+        </header>
+
+        <div class="reg-window" id="registerFormContainer">
+          <h3 class="active">Register</h3>
+            <form id="registerForm" class="reg">
+                <input id="inEmail" type="email" placeholder="Email" name="Email" autocomplete="email" required /><br>
+                <input id="inPass" type="password" placeholder="Password" name="Password" autocomplete="new-password" required /><br>
+                <input id="submit" type="submit"/><br>
+            </form>
+            <button id="showLoginForm">Switch to Log In</button><br>
+            <button id="forgotPasswordButton">Forgot Password?</button>
+        </div>
+
+        <div id="loginFormContainer" class="log-window" style="display: none;">
+          <h3 class="active">Log in</h3>
+          <form id="loginForm" class="log">
+            <input type="email" id="loginEmail" placeholder="Email" name="Email" autocomplete="email" required /><br>
+            <input type="password" id="loginPassword" placeholder="Password" name="Password" autocomplete="new-password" required /><br>
+            <input id="submit" type="submit"/><br>
+          </form>
+          <button id="showRegisterForm">Switch to Register</button><br>
+          <button id="forgotPasswordButton">Forgot Password?</button>
+        </div>
+
+        <!-- Форма для сброса пароля -->
+        <div id="forgotPasswordContainer" class="forgot-window" style="display: none;">
+          <form id="forgotPasswordForm" class="forgot">
+            <input type="email" id="forgotPasswordEmail" placeholder="Enter your email" name="Email" autocomplete="email" required /><br>
+            <input id="submit" type="submit"/><br>
+          </form>
+          <button id="return" class="return">Return</button>
+        </div>
+
+    </body>
+
+</html>

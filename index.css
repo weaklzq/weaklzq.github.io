@@ -1,0 +1,183 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+  
+body {
+    font-family: "SUSE", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-style: normal;
+    padding: 20px;
+    background-image: url(backImg.jpg);
+}
+
+.header {
+    margin: 100px auto;
+    color: whitesmoke;
+    text-align: center;
+    border-bottom: 2px solid whitesmoke;
+    max-width: 500px;
+    font-size: 20px;
+}
+
+.reg-window,
+.log-window,
+.forgot-window {
+    border: 1px solid grey;
+    max-width: 500px;
+    height: 450px;
+    display: block;
+    margin: 50px auto;
+    padding: 40px 0 40px 0;
+    backdrop-filter: blur(2px);
+    border-radius: 10px;
+}
+.reg,
+.log
+.forgot {
+    text-align: center;
+    color: aliceblue;
+}
+#submit {
+    border-radius: 10px;
+    margin-top: 15px;
+    padding: 5px 10px 5px 10px;
+    background: none;
+    cursor: pointer;
+    color: aliceblue;
+    transition-duration: 0.2s;
+    -webkit-transition-duration: 0.2s;
+    display: block;
+    margin: 15px auto;
+}
+#submit:hover {
+    font-size: 16px;
+}
+
+
+#forgotPasswordButton {
+    border: none;
+    border-radius: 10px;
+    padding: 5px 10px 5px 10px;
+    cursor: pointer;
+    background: none;
+    transition-duration: 0.2s;
+    -webkit-transition-duration: 0.2s;
+    max-width: 200px;
+    color: aliceblue;
+    display: block;
+    margin: 20px auto;
+}
+#forgotPasswordButton:hover {
+    backdrop-filter: none;
+    border: 1px solid white;
+    font-size: 16px;
+
+}
+#googleAuth {
+    margin-top: 15px;
+    background-color: none;
+    transition-duration: 0.2s;
+    -webkit-transition-duration: 0.2s;
+
+
+}
+#offgoog {
+    display: none;
+}
+#googleAuth:hover {
+    width: 70px;
+    height: 70px;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+}
+
+#inEmail,
+#inPass,
+#loginEmail,
+#loginPassword {
+    margin-top: 10px;
+    padding: 10px 10px;
+    width: 350px;
+    font-size: 16px;
+    border-radius: 15px;
+    background: none;
+    font-family: "SUSE", sans-serif;
+    color: whitesmoke;
+    transition: padding 0.5s ease; /* Плавный переход для выравнивания текста */
+    outline: none;
+    display: block;
+    margin: 0px auto;
+}
+#inEmail:hover,
+#inPass:hover,
+#loginEmail:hover,
+#loginPassword:hover {
+    padding: 10px 50px;
+}
+
+
+#showLoginForm,
+#showRegisterForm {
+    margin: 15px auto;
+    padding: 10px 20px 10px 20px;
+    border-radius: 10px;
+    font-family: "SUSE", sans-serif;
+    background: none;
+    color: whitesmoke;
+    cursor: pointer;
+    transition-duration: 0.2s;
+    -webkit-transition-duration: 0.2s;
+    border: 1px solid;
+    display: block;
+}
+#showLoginForm:hover,
+#showRegisterForm:hover {
+    font-size: 16px;
+}
+
+.active {
+    text-align: center;
+    font-family: "SUSE", sans-serif;
+    font-size: 30px;
+    color: aliceblue;
+    margin-bottom: 10px;
+}
+
+.return {
+    border-radius: 10px;
+    margin-top: 15px;
+    padding: 5px 10px 5px 10px;
+    background: none;
+    cursor: pointer;
+    color: aliceblue;
+    transition-duration: 0.2s;
+    -webkit-transition-duration: 0.2s;
+    display: block;
+    margin: 15px auto;
+    font-size: 16px;
+}
+.return:hover {
+    font-size: 20px;
+}
+
+#forgotPasswordEmail {
+    margin-top: 10px;
+    padding: 10px 10px;
+    width: 350px;
+    font-size: 16px;
+    border-radius: 15px;
+    background: none;
+    font-family: "SUSE", sans-serif;
+    color: whitesmoke;
+    transition: padding 0.5s ease; /* Плавный переход для выравнивания текста */
+    outline: none;
+    display: block;
+    margin: 10px auto;
+}
+#forgotPasswordEmail:hover {
+    padding: 10px 50px;
+}

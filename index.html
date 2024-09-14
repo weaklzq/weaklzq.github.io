@@ -13,7 +13,7 @@
         <script type="module">
           // Подключение Firebase через CDN
           import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-          import { getAuth, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+          import { getAuth, createUserWithEmailAndPassword, signInWithPopup, signInWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
       
           const firebaseConfig = {
             apiKey: "AIzaSyAubA02OcvxHWf63bJStwB1IqZTn4eunw0",
@@ -28,7 +28,6 @@
           // Инициализация Firebase
           const app = initializeApp(firebaseConfig);
           const auth = getAuth(app); // auth должен быть объявлен здесь
-          const provider = new GoogleAuthProvider();
       
           // Теперь ваш код для регистрации пользователя
           document.getElementById('registerForm').addEventListener('submit', function (e) {

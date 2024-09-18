@@ -3,6 +3,7 @@ body {
     padding: 0;
     background-image: url(backgroundmain.jpg);
     background-size: cover;
+    background-repeat: no-repeat;
 }
 #game {
     position: relative;

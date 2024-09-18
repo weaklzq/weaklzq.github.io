@@ -32,9 +32,9 @@ function getHitbox() {
 hitbox.addEventListener('click', getHitbox);
 
 // Звуки
-const coinSound = new Audio('../sounds/coin_sound.wav');
-const hitSound = new Audio('../sounds/hit_sound.wav');
-const backgroundMusic = new Audio('../sounds/background.wav');
+const coinSound = new Audio('../sounds/coin_sound.mp3');
+const hitSound = new Audio('../sounds/hit_sound.mp3');
+const backgroundMusic = new Audio('../sounds/background.mp3');
 coinSound.volume = 0.2;
 hitSound.volume = 0.2;
 backgroundMusic.volume = 0.1;

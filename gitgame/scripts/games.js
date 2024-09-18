@@ -32,12 +32,12 @@ function getHitbox() {
 hitbox.addEventListener('click', getHitbox);
 
 // Звуки
-const coinSound = new Audio('..\sounds\background.mp3');
-const hitSound = new Audio('..\sounds\hit_sound.mp3');
-const backgroundMusic = new Audio('..\sounds\background.mp3');
-coinSound.volume = 0.2;
-hitSound.volume = 0.2;
-backgroundMusic.volume = 0.1;
+const coinSound = new Audio("../sounds/background.wav");
+const hitSound = new Audio('../sounds/hit_sound.wav');
+const backgroundMusic = new Audio(src = "../sounds/background.wav");
+coinSound.volume = 0.5;
+hitSound.volume = 0.5;
+backgroundMusic.volume = 0.5;
 backgroundMusic.loop = true;
 backgroundMusic.play();
 
@@ -207,7 +207,7 @@ gameLoop();
 document.addEventListener('DOMContentLoaded', () => {
     const scoreElement = document.getElementById('score');
     const nicknameForm = document.getElementById('nicknameForm');
-    const leaderboardTable = document.getElementById('leaderboard').getElementsByTagName('tbody')[0];
+    const leaderboardTable = document.getElementById('leaderboard')
     let score = 0;
     let nickname = '';
 

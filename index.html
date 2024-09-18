@@ -1,173 +1,79 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Move into ur dream</title>
-        <link rel="stylesheet" href="styles/index.css"/>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=SUSE:wght@800&display=swap" rel="stylesheet">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>weaklzq's portfolio</title>
+    <link rel="stylesheet" href="styles/index.css">
+    <meta name="description" content="This is the portfolio of weaklzq. Welcome">
 
 
-        <script type="module">
-          // Подключение Firebase через CDN
-          import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-          import { getAuth, createUserWithEmailAndPassword, signInWithPopup, signInWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
-      
-          const firebaseConfig = {
-            apiKey: "AIzaSyAubA02OcvxHWf63bJStwB1IqZTn4eunw0",
-            authDomain: "project1-83e37.firebaseapp.com",
-            projectId: "project1-83e37",
-            storageBucket: "project1-83e37.appspot.com",
-            messagingSenderId: "879925774333",
-            appId: "1:879925774333:web:2e96201ce14cb2d56d7b94",
-            measurementId: "G-CH219MGLXD"
-          };
-      
-          // Инициализация Firebase
-          const app = initializeApp(firebaseConfig);
-          const auth = getAuth(app); // auth должен быть объявлен здесь
-      
-          // Теперь ваш код для регистрации пользователя
-          document.getElementById('registerForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-            const email = document.getElementById('inEmail').value;
-            const password = document.getElementById('inPass').value;
-            
-            createUserWithEmailAndPassword(auth, email, password) // используем auth
-              .then((userCredential) => {
-                const user = userCredential.user;
-                console.log('User registered:', user);
-                window.location.href = 'main.html'; // Перенаправление
-              // Обновляем профиль пользователя, чтобы сохранить имя пользователя          
-              })
-              .catch((error) => {
-              var errorCode = error.code;
-              var errorMessage = error.message;
-              console.error('Error:', errorCode, errorMessage);
-              });
-          });
 
-
-          // Функция для входа пользователя
-          async function loginUser() {
-            const email = document.getElementById('loginEmail').value;
-            const password = document.getElementById('loginPassword').value;
-
-          try {
-            const userCredential = await signInWithEmailAndPassword(auth, email, password);
-            const user = userCredential.user;
-            console.log('User logged in:', user);
-            window.location.href = 'main.html'; // Перенаправление после успешного входа
-          } catch (error) {
-            console.error('Error during login:', error);
-            alert('Login failed: ' + error.message);
-          }
-          }
-
-          // Функция для сброса пароля
-          async function resetPassword() {
-          const email = document.getElementById('forgotPasswordEmail').value;
-
-          try {
-          await sendPasswordResetEmail(auth, email);
-          alert('Password reset email sent. Please check your inbox.');
-          document.getElementById('forgotPasswordContainer').style.display = 'none'; // Скрываем форму сброса пароля
-          } catch (error) {
-          console.error('Error during password reset:', error);
-          alert('Password reset failed: ' + error.message);
-          }
-          }
-
-          // Обработчики событий
-          document.addEventListener('DOMContentLoaded', () => {
-          // Переключение на форму регистрации
-          document.getElementById('showRegisterForm').addEventListener('click', () => {
-          document.getElementById('registerFormContainer').style.display = 'block';
-          document.getElementById('loginFormContainer').style.display = 'none';
-          });
-
-          // Переключение на форму входа
-          document.getElementById('showLoginForm').addEventListener('click', () => {
-          document.getElementById('registerFormContainer').style.display = 'none';
-          document.getElementById('loginFormContainer').style.display = 'block';
-          });
-
-          // Показ формы сброса пароля
-          document.getElementById('forgotPasswordButton').addEventListener('click', () => {
-          document.getElementById('forgotPasswordContainer').style.display = 'block';
-          document.getElementById('registerFormContainer').style.display = 'none';
-          document.getElementById('loginFormContainer').style.display = 'none';
-          });
-
-
-          document.getElementById('return').addEventListener('click', () => {
-          document.getElementById('forgotPasswordContainer').style.display = 'none';
-          document.getElementById('loginFormContainer').style.display = 'none';
-          document.getElementById('registerFormContainer').style.display = 'block';
-          });
-
-          // Обработка формы регистрации
-          document.getElementById('registerForm').addEventListener('submit', (e) => {
-          e.preventDefault();
-          registerUser();
-          });
-
-          // Обработка формы входа
-          document.getElementById('loginForm').addEventListener('submit', (e) => {
-          e.preventDefault();
-          loginUser();
-          });
-           // Обработка формы сброса пароля
-          document.getElementById('forgotPasswordForm').addEventListener('submit', (e) => {
-          e.preventDefault();
-          resetPassword();
-          });
-          });
-      
-        </script>
-
-    </head>
-
-    <body class="body">
-
-        <header class="header">
-            <h1>Welcome</h1><br>
-            <p>your dream has never been closer than now</p>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fascinate+Inline&display=swap" rel="stylesheet">
+</head>
+<article></article>
+<body>
+    <div class="page-container">
+        <header>
+            <h1 class="fascinate-inline-regular">The website of a beginner web developer</h1>
+            <p>Hi, i'm <b>weaklzq</b>, and this is my mini portfolio</p>
+            <img onclick ="window.location.href = 'https://github.com/weaklzq'" src="styles/git.png" width="50" height="50" alt="my github">
         </header>
-
-        <div class="reg-window" id="registerFormContainer">
-          <h3 class="active">Register</h3>
-            <form id="registerForm" class="reg">
-                <input id="inEmail" type="email" placeholder="Email" name="Email" autocomplete="email" required /><br>
-                <input id="inPass" type="password" placeholder="Password" name="Password" autocomplete="new-password" required /><br>
-                <input id="submit" type="submit"/><br>
-            </form>
-            <button id="showLoginForm">Switch to Log In</button><br>
-            <button id="forgotPasswordButton">Forgot Password?</button>
+    
+        <main>
+            <section>
+                <h2>About me</h2>
+                <p>I'm a beginner website developer (at least for now). Now that I am making this site is September 18, 2024, and my journey has already lasted a week. 
+                The purpose of this site is to monitor my achievements, I’ll explain, from here you can get to my mini-projects that I develop during my studies. 
+                This site did this primarily for me, so that I could highlight my progress. Besides, this is just a simple introduction site, my goal was not to make it with a million functions and innovative design. 
+                Please know that if you have visited this site, it means <b>I am waiting for your assessment!</b></p>
+            </section>
+    
+            <aside>
+                <h2>Projects</h2>
+                <p>Here are some of the projects that i've made:</p>
+                <div class="cosmicgame">
+                    <p onclick="window.location.href = 'https://weaklzq.github.io/gitgame/'">Simple CosmoGame</p>
+                    <img class="img1" src="styles/spacecraft.png" width="40" height="40" alt="spacecraft">
+                </div>
+                <div class="calc">
+                    <p onclick="window.location.href = 'https://weaklzq.github.io/calc/'">Simple Calculator</p>
+                    <img class="img2" src="styles/calc.png" width="40" height="40" alt="calculator">
+                </div>
+            </aside>
+    
+        </main>
+        <div id="github-stats">
+            <div class="stat-widget"><img src="https://github-readme-stats.vercel.app/api?username=weaklzq&show_icons=true&theme=radical" alt="GitHub Stats"></div>
+            <div class="stat-widget"><img src="https://github-readme-streak-stats.herokuapp.com/?user=weaklzq&theme=radical" alt="GitHub Streak" /></div>
+            <div class="stat-widget"><img src="https://github-readme-stats.vercel.app/api/top-langs/?username=weaklzq&layout=compact&theme=radical" alt="Top Languages" /></div>
+            
         </div>
+        <footer>
+            <section>
+                <h2>U can rate this site here😊</h2>
+                <div class="rating">
+                    <span class="star" data-value="5">&#9733;</span>
+                    <span class="star" data-value="4">&#9733;</span>
+                    <span class="star" data-value="3">&#9733;</span>
+                    <span class="star" data-value="2">&#9733;</span>
+                    <span class="star" data-value="1">&#9733;</span>
+                </div>
+                <p id="rating-result"></p>
+            </section>
+            <section>
+                <h2>Contact me</h2>
+                <p>If you want to contact me, you can send me an email at <a href="mailto:foreingeit@gmail.com">my email</a>.</p>
+            </section>
+            <b><p id="current-date-time">Current Date and Time will be displayed here</p></b>
+        </footer>
+    </div>
+    
 
-        <div id="loginFormContainer" class="log-window" style="display: none;">
-          <h3 class="active">Log in</h3>
-          <form id="loginForm" class="log">
-            <input type="email" id="loginEmail" placeholder="Email" name="Email" autocomplete="email" required /><br>
-            <input type="password" id="loginPassword" placeholder="Password" name="Password" autocomplete="new-password" required /><br>
-            <input id="submit" type="submit"/><br>
-          </form>
-          <button id="showRegisterForm">Switch to Register</button><br>
-          <button id="forgotPasswordButton">Forgot Password?</button>
-        </div>
 
-        <!-- Форма для сброса пароля -->
-        <div id="forgotPasswordContainer" class="forgot-window" style="display: none;">
-          <form id="forgotPasswordForm" class="forgot">
-            <input type="email" id="forgotPasswordEmail" placeholder="Enter your email" name="Email" autocomplete="email" required /><br>
-            <input id="submit" type="submit"/><br>
-          </form>
-          <button id="return" class="return">Return</button>
-        </div>
 
-    </body>
-
+    <script src="scripts/index.js"></script>
+</body>
 </html>

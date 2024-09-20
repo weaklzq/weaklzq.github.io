@@ -3,14 +3,14 @@ body {
     padding: 0;
     background-image: url(backgroundmain.jpg);
     background-size: cover;
-    background-repeat: no-repeat;
 }
 #game {
     position: relative;
     top: -50px;
     width: 800px;
     height: 800px;
-    border: 5px solid blue;
+    border: 5px solid rgb(53, 53, 119);
+    border-radius: 5px;
     backdrop-filter: blur(5px);
     margin: 0 auto;
 }
@@ -80,16 +80,62 @@ h1{
 .hitbox {
     border: 2px solid white;
 }
-
-#reg {
+.nick {
     position: absolute;
     top: 150px;
     left: 167px;
 }
-#username {
+#name {
     width: 200px;
     height: 35px;
     background: none;
     color: whitesmoke;
     backdrop-filter: blur(10px);
+    text-align: center;
+}
+/* Затемнение фона */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Полупрозрачный черный цвет */
+    z-index: 1; /* Позволяет разместить элемент под модальным окном */
+    backdrop-filter: blur(5px); /* Размытие фона */
+  }
+  
+  /* Модальное окно */
+  .modal {
+    position: relative;
+    z-index: 2; /* Выше затемнения */
+    background-color: rgba(0, 0, 255, 0.651);
+    padding: 20px;
+    margin: 100px auto;
+    width: 300px;
+    text-align: center;
+    border-radius: 10px;
+    color: black;
+    box-shadow: 5px 5px 15px rgba(27, 37, 173, 0.5);
+}
+.modal p {
+    font-size: 20px;
+    color: white;
+}
+
+#leaderboard {
+    position: absolute;
+    top: 250px;
+    left: 157px;
+    width: 200px;
+    height: auto;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border-radius: 10px;
+    padding: 10px;
+    backdrop-filter: blur(5px);
+    border: 5px solid white;
+}
+#leaderboard h2 {
+    text-align: center;
 }

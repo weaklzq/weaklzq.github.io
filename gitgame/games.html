@@ -4,14 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PicheyGames's Games</title>
-    <link rel="stylesheet" href="styles/games.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
-        <h1>Score: <span id="score">0</span></h1>
-        <button class="glow-on-hover" id="hitbox" type="button">Turn On HitBoxes</button>
-        <form id="reg">
-            <input type="text" id="username" name="username" placeholder="Nickname" required>
-        </form>
+    <h1>Score: <span id="score">0</span></h1>
+    <button class="glow-on-hover" id="hitbox" type="button">HitBoxes</button>
+    <div id="overlay" class="overlay"></div>
+    <div id="modal" class="modal">
+        <p>Please, write ur nickname to save ur <b>score</b></p>
+        <form id="nick" method="post">
+            <input type="text" name="name" id="name" placeholder="Name">
+        </form> 
+    </div>
+
+    <div id="leaderboard">
+        <h2>Leaderboard</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Player</th>
+                <th>Score</th>
+            </tr>
+            </thead>
+            <tbody id="leaderboardBody">
+            <!-- Данные таблицы лидеров будут добавлены здесь -->
+            </tbody>
+        </table>
+    </div>
+         
     <div id="game">
         <div class="player" id="player"><img src="styles/spacecraft.png" width="30" height="30"/></div>
         <div class="coin" id="coin"><img src="styles/coins.png" width="30" height="30"></div>
@@ -22,6 +43,6 @@
         <div class="obstacle" id="obstacle5"><img src="styles/asteroid.png" width="40" height="40"/></div>
     </div>
 
-    <script src="scripts/games.js"></script>
+    <script src="dist/bundle.js"></script>
 </body>
 </html>

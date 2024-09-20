@@ -1,3 +1,90 @@
+import '../styles/games.css';
+
+// Звуки
+const coinSound = new Audio('sounds/coin_sound.wav');
+const hitSound = new Audio('sounds/hit_sound.wav');
+const backgroundMusic = new Audio('sounds/background.wav');
+coinSound.volume = 0.2;
+hitSound.volume = 0.2;
+backgroundMusic.volume = 0.1;
+backgroundMusic.loop = true;
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getDatabase, ref, push, set, update, child, get, query, orderByChild, limitToFirst, limitToLast } from "firebase/database";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyAubA02OcvxHWf63bJStwB1IqZTn4eunw0",
+  authDomain: "project1-83e37.firebaseapp.com",
+  databaseURL: "https://project1-83e37.europe-west1.firebasedatabase.app/",
+  projectId: "project1-83e37",
+  storageBucket: "project1-83e37.appspot.com",
+  messagingSenderId: "879925774333",
+  appId: "1:879925774333:web:f588e6a2756988ab6d7b94",
+  measurementId: "G-PDXE0SBPNQ"
+};
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
+
+const leaderboardRef = ref(database, 'leaderboard');
+
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('nick');
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const input = document.getElementById('name');
+    const scoreElement = document.getElementById('score'); // Предполагаем, что элемент с фиксированным счётом имеет id 'score'
+    const score = parseInt(scoreElement.textContent, 10); // Получаем текстовое содержимое и преобразуем его в число
+    const playerName = input.value.trim();
+
+    if (playerName && isValidPlayerName(playerName)) {
+        writeUserData(playerName, score);
+        backgroundMusic.play();
+      } else {
+        alert('Please enter a valid name.');
+      }
+  });
+    // Получаем и отображаем таблицу лидеров при загрузке страницы
+    displayLeaderboard();
+});
+
+function isValidPlayerName(name) {
+    // Проверяем, что имя не пустое и не содержит недопустимых символов
+    const invalidChars = /[.#$[\]]/;
+    return !invalidChars.test(name);
+}
+
+const overlay = document.getElementById('overlay');
+const modal = document.getElementById('modal');
+
+function writeUserData(player, score) {
+    const playerRef = ref(database, `leaderboard/${player}`);
+    set(playerRef, {
+        player: player,
+        score: score,
+        timestamp: Date.now()
+  });
+  alert('Contol keys: WASD or arrows! Are u ready?');
+  alert('*the game sometimes has bugs, sorry(*');
+  document.getElementById('name').setAttribute('disabled', true);
+
+  overlay.classList.remove('overlay');
+  modal.classList.remove('modal');
+  document.getElementById('nick').classList.add('nick');
+
+  // Начальное размещение монеты
+    moveCoin();
+
+// Запуск игрового цикла
+    gameLoop();
+
+} 
+
 const player = document.getElementById('player');
 const coin = document.getElementById('coin');
 const obstacles = [
@@ -30,16 +117,6 @@ function getHitbox() {
 }
 // Обработчик события для кнопки
 hitbox.addEventListener('click', getHitbox);
-
-// Звуки
-const coinSound = new Audio('..\sounds\background.mp3');
-const hitSound = new Audio('..\sounds\hit_sound.mp3');
-const backgroundMusic = new Audio('..\sounds\background.mp3');
-coinSound.volume = 0.2;
-hitSound.volume = 0.2;
-backgroundMusic.volume = 0.1;
-backgroundMusic.loop = true;
-backgroundMusic.play();
 
 // Инициализация препятствий
 let obstaclePositions = initializeObstacles();
@@ -177,11 +254,79 @@ function updateObstacles() {
 
         if (checkCollision(playerRect, obstacleRect)) {
             hitSound.play();
-            alert('You hit an obstacle! Restarting the game...');
+            alert('You hit an obstacle! Restart the game? BE READY:)');
+            let input = document.getElementById('name');
+            let playerName = input.value.trim();
+            updateUserData(playerName, score);
             resetGame();
         }
     });
 }
+
+function updateUserData(player, score) {
+    const playerRef = ref(database, `leaderboard/${player}`);
+
+    get(playerRef).then((snapshot) => {
+      if (snapshot.exists()) {
+        const currentScore = snapshot.val().score;
+        if (score > currentScore) {
+          update(playerRef, {
+            score: score,
+            timestamp: Date.now()
+          }).then(() => {
+            displayLeaderboard(); // Обновляем таблицу лидеров после сохранения данных
+          }).catch((error) => {
+            console.error('Error updating score:', error);
+            alert('Failed to update score.');
+          });
+        } 
+      }
+    }).catch((error) => {
+      console.error('Error getting current score:', error);
+      alert('Failed to get current score.');
+    });
+  }
+
+
+  function displayLeaderboard() {
+    const leaderboardBody = document.getElementById('leaderboardBody');
+    leaderboardBody.innerHTML = ''; // Очищаем таблицу перед обновлением
+  
+    const leaderboardQuery = query(leaderboardRef, orderByChild('score'), limitToLast(10));
+  
+    get(leaderboardQuery).then((snapshot) => {
+      if (snapshot.exists()) {
+        let rank = 1;
+        const leaderboardData = [];
+        snapshot.forEach((childSnapshot) => {
+          leaderboardData.push(childSnapshot.val());
+        });
+  
+        // Сортируем данные по убыванию очков
+        leaderboardData.sort((a, b) => b.score - a.score);
+  
+        leaderboardData.forEach((data) => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${rank}</td>
+            <td>${data.player}</td>
+            <td>${data.score}</td>
+          `;
+          leaderboardBody.appendChild(row);
+          rank++;
+        });
+      } else {
+        const row = document.createElement('tr');
+        row.innerHTML = '<td colspan="3">No data available</td>';
+        leaderboardBody.appendChild(row);
+      }
+    }).catch((error) => {
+      console.error('Error getting leaderboard data:', error);
+      const row = document.createElement('tr');
+      row.innerHTML = '<td colspan="3">Failed to load data</td>';
+      leaderboardBody.appendChild(row);
+    });
+  }
 
 function gameLoop() {
     movePlayer(); // Обновляем движение игрока
@@ -198,68 +343,3 @@ document.addEventListener('keyup', (event) => {
     keysPressed[event.key] = false; // Обнуляем состояние клавиши
 });
 
-// Начальное размещение монеты
-moveCoin();
-
-// Запуск игрового цикла
-gameLoop();
-
-document.addEventListener('DOMContentLoaded', () => {
-    const scoreElement = document.getElementById('score');
-    const nicknameForm = document.getElementById('nicknameForm');
-    const leaderboardTable = document.getElementById('leaderboard').getElementsByTagName('tbody')[0];
-    let score = 0;
-    let nickname = '';
-
-    // Загрузка таблицы лидеров из LocalStorage
-    const loadLeaderboard = () => {
-        const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
-        leaderboardTable.innerHTML = '';
-        leaderboard.forEach(entry => {
-            const row = leaderboardTable.insertRow();
-            const cell1 = row.insertCell(0);
-            const cell2 = row.insertCell(1);
-            cell1.textContent = entry.username;
-            cell2.textContent = entry.score;
-        });
-    };
-
-    // Сохранение таблицы лидеров в LocalStorage
-    const saveLeaderboard = (username, score) => {
-        const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
-        leaderboard.push({ username, score });
-        leaderboard.sort((a, b) => b.score - a.score); // Сортировка по убыванию
-        localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
-        loadLeaderboard();
-    };
-
-    // Обработка отправки формы
-    nicknameForm.addEventListener('submit', (event) => {
-        event.preventDefault();
-        nickname = document.getElementById('nickname').value;
-        nicknameForm.style.display = 'none';
-        startGame();
-    });
-
-    // Функция для начала игры
-    const startGame = () => {
-        score = 0;
-        scoreElement.textContent = score;
-        // Ваш код для начала игры
-    };
-
-    // Функция для завершения игры
-    const endGame = () => {
-        saveLeaderboard(nickname, score);
-        nicknameForm.style.display = 'block';
-    };
-
-    // Пример функции для обновления счета
-    const updateScore = (points) => {
-        score += points;
-        scoreElement.textContent = score;
-    };
-
-    // Загрузка таблицы лидеров при загрузке страницы
-    loadLeaderboard();
-});

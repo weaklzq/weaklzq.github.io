@@ -222,6 +222,18 @@ section {
     left: 12rem;
     top: -3rem;
 }
+@media (max-width: 1920px) {
+    #boy {
+        scale: 0.8;
+        top: -18rem;
+        left: 6rem;
+    }
+    #rain {
+        scale: 0.8;
+        top: -5rem;
+        left: 6rem;
+    }   
+}
 #boy.anim {
     animation-name: pic;
     animation-duration: 1s;

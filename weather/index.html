@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="styles/index.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+</head>
+<body>
+        <header id="head">
+            <nav>
+                <a href="https://melkwik.me/"><img src="styles/images/back.png" width="50" height="50" id="back"></a>
+                <a href="https://github.com/weaklzq"><img src="styles/images/git.png" width="50" height="50" id="github"></a>
+            </nav>
+            <video autoplay muted loop id="backgroundVideo">
+                <source src="styles/videos/rain-bg.mp4" type="video/mp4">
+            </video>
+            <div>
+                <h1>This time you can avoid unexpected rain</h1>
+                <button id="scrollButton">les's start</button>
+            </div>
+        </header>
+        <main>
+            <article>
+                <div>
+                    <h3>Interesting fact about the weather</h3>
+                    <p>The highest temperature ever recorded on Earth was an astonishing 56.7°C (134°F) in Furnace Creek Ranch, located in Death Valley, California, on July 10, 1913. Death Valley is one of the hottest places on the planet due to its low elevation (86 meters below sea level) and unique geography, which traps heat. However, what's surprising is that despite its scorching summer temperatures, Death Valley can experience quite cold winters. Temperatures can drop below freezing at night, and in rare cases, the valley even sees snow on its surrounding peaks. This extreme contrast makes Death Valley a place of fascinating weather phenomena, where blazing heat and cold co-exist in one of the most extreme climates on Earth.
+                    Additionally, Death Valley holds the record for the lowest annual precipitation in North America, receiving an average of just 2 inches (50 mm) of rain per year. Yet, when it does rain, the usually dry desert can come alive with wildflowers, creating a stunning yet brief transformation known as a "super bloom."</p>
+                </div>
+                <img src="styles/images/desert.jpg" alt="desert">
+            </article>
+            <section>
+                <div class="images">
+                    <img src="styles/images/rain.png" alt="rain" id="rain">
+                    <img src="styles/images/boy.png" alt="boy" id="boy">
+                </div>
+
+                <div class="search">
+                    <input id="search" type="text" placeholder="Search city">
+                    <button id="searchButton">Search</button>
+                    <div class="checkbox-wrapper-46">
+                        <input type="checkbox" id="cbx-46" class="inp-cbx" />
+                        <label for="cbx-46" class="cbx"
+                          ><span>
+                            <svg viewBox="0 0 12 10" height="10px" width="12px">
+                              <polyline points="1.5 6 4.5 9 10.5 1"></polyline></svg></span
+                          ><span>5 Day / 3 Hour Forecast</span>
+                        </label>
+                      </div>
+                </div>
+
+                <dialog class="weather" id="modal">
+                    <section class="weather-info" id="weatherInfo"></section>
+                    <button id="closeButton">Close window</button>
+                </dialog>
+            </section>
+        </main>
+        <footer>
+            <div>
+                <h4>Designed by <a href="https://github.com/weaklzq"><strong>weaklzq</strong></a></h4>
+                <p>Thank you for visiting my site❤️</p>
+            </div>
+            <div>
+                <button id="scrollTopButton">
+                    <div class="text">
+                      <span>Back</span>
+                      <span>to</span>
+                      <span>top</span>
+                    </div>
+                    <div class="clone">
+                      <span>Back</span>
+                      <span>to</span>
+                      <span>top</span>
+                    </div>
+                    <svg
+                      stroke-width="2"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      class="h-6 w-6"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20px"
+                    >
+                      <path
+                        d="M14 5l7 7m0 0l-7 7m7-7H3"
+                        stroke-linejoin="round"
+                        stroke-linecap="round"
+                      ></path>
+                    </svg>
+                  </button>
+                  
+            </div>
+
+        </footer>
+
+    <script src="scripts/script.js"></script>
+</body>
+</html>

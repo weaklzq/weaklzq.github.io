@@ -361,7 +361,10 @@ footer {
     font-size: 1.3rem;
     font-family: "Open Sans", sans-serif;
     font-weight: 800;  
-
+}
+footer p, strong, h4 {
+    position: relative;
+    z-index: 1;
 }
 footer button {
     width: 140px;

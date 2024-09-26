@@ -566,6 +566,11 @@ footer button {
     padding: 1rem;
     position: relative;
 }
+@media (max-width: 1920px) {
+    .forecast-info {
+        font-size: 1.2rem;
+    }  
+}
 
 .forecast-item {
     display: flex;

@@ -234,6 +234,17 @@ section {
         left: 6rem;
     }   
 }
+@media (max-width: 728px) {
+    #boy {
+        display: none;
+    }
+    #rain {
+        display: none;
+    } 
+    footer button {
+        display: none;
+    }  
+}
 #boy.anim {
     animation-name: pic;
     animation-duration: 1s;
